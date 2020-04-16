@@ -1291,6 +1291,11 @@ describe('parse', function() {
 		expect(parsed.cssRules[0].style.content).toBe('"\\""');
 	});
 
+	given('a{content:"\\""}', function(input) {
+		var parsed = CSSOM.parse(input);
+		expect(parsed.cssRules[0].style.content).toBe('"\\""');
+	});
+
 	given("a{content:'\\''}", function(input) {
 		var parsed = CSSOM.parse(input);
 		expect(parsed.cssRules[0].style.content).toBe("'\\''");
@@ -1306,6 +1311,15 @@ describe('parse', function() {
 		expect(parsed.cssRules[0].style.content).toBe("'abc\\'\\'d\\'ef'");
 	});
 
+	given('a{content:"\\\\"}', function(input) {
+		var parsed = CSSOM.parse(input);
+		expect(parsed.cssRules[0].style.content).toBe('"\\\\"');
+	});
+
+	given("a{content:'\\\\'}", function(input) {
+		var parsed = CSSOM.parse(input);
+		expect(parsed.cssRules[0].style.content).toBe("'\\\\'");
+	});
 });
 });
 
