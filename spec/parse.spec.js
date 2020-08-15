@@ -1320,6 +1320,13 @@ describe('parse', function() {
 		var parsed = CSSOM.parse(input);
 		expect(parsed.cssRules[0].style.content).toBe("'\\\\'");
 	});
+
+	// Don't throw error if invalid CSS is encountered
+	given(`background-color:white;color:#333;font-family:"Noto Sans","sans-serif";font-size:14px;line-height:20px;margin:0;}`, function(input) {
+		var parsed = CSSOM.parse(input);
+		console.log(parsed.cssRules)
+		expect(parsed.cssRules.length).toBe(0);
+	});
 });
 });
 
